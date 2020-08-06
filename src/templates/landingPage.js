@@ -1,4 +1,5 @@
 import React from 'react';
+import Layout from '../components/layout';
 
 const LandingPage = ({ pageContext }) => {
   const baseUrl = 'https://thirsty-shannon-179bfb.netlify.app';
@@ -10,7 +11,7 @@ const LandingPage = ({ pageContext }) => {
   }
 
   return (
-    <div>
+    <Layout>
       <h1>{title}</h1>
       {description && <p>{description}</p>}
       {qrIsShown && (
@@ -25,7 +26,6 @@ const LandingPage = ({ pageContext }) => {
           <thead>
             <tr>
               <th>Name</th>
-              <th>Description</th>
               {qrIsShown && <th>QR</th>}
             </tr>
           </thead>
@@ -40,8 +40,8 @@ const LandingPage = ({ pageContext }) => {
                   <tr key={id}>
                     <td>
                       <a href={correctLink}>{title}</a>
+                      {correctDescription && <p>{correctDescription}</p>}
                     </td>
-                    <td>{correctDescription}</td>
                     {qrIsShown && (
                       <td>
                         <img
@@ -58,7 +58,7 @@ const LandingPage = ({ pageContext }) => {
           </tbody>
         </table>
       )}
-    </div>
+    </Layout>
   );
 };
 
