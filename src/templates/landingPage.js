@@ -1,27 +1,29 @@
 import React from 'react';
 
 const LandingPage = ({ pageContext }) => {
-  // console.log(pageContext);
-
   const baseUrl = 'https://thirsty-shannon-179bfb.netlify.app';
-  const { slug, id, title, description, assets } = pageContext;
+  const { slug, title, description, assets } = pageContext;
+  const urlParams = new URLSearchParams(window.location.search);
+  const qrIsShown = urlParams.get('qr') !== null;
 
   return (
     <div>
       <h1>{title}</h1>
       {description && <p>{description}</p>}
-      <img
-        src={`https://api.qrserver.com/v1/create-qr-code/?data=${baseUrl}/${slug}&amp;size=100x100`}
-        alt={title}
-        title={description}
-      />
+      {qrIsShown && (
+        <img
+          src={`https://api.qrserver.com/v1/create-qr-code/?data=${baseUrl}/${slug}&amp;size=100x100`}
+          alt={title}
+          title={description}
+        />
+      )}
       {assets && (
         <table>
           <thead>
             <tr>
               <th>Name</th>
               <th>Description</th>
-              <th>QR</th>
+              {qrIsShown && <th>QR</th>}
             </tr>
           </thead>
           <tbody>
@@ -37,13 +39,15 @@ const LandingPage = ({ pageContext }) => {
                       <a href={correctLink}>{title}</a>
                     </td>
                     <td>{correctDescription}</td>
-                    <td>
-                      <img
-                        src={`https://api.qrserver.com/v1/create-qr-code/?data=${correctLink}&amp;size=100x100`}
-                        alt={title}
-                        title={correctDescription}
-                      />
-                    </td>
+                    {qrIsShown && (
+                      <td>
+                        <img
+                          src={`https://api.qrserver.com/v1/create-qr-code/?data=${correctLink}&amp;size=100x100`}
+                          alt={title}
+                          title={correctDescription}
+                        />
+                      </td>
+                    )}
                   </tr>
                 );
               }
