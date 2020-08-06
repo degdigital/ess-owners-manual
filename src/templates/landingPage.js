@@ -3,8 +3,11 @@ import React from 'react';
 const LandingPage = ({ pageContext }) => {
   const baseUrl = 'https://thirsty-shannon-179bfb.netlify.app';
   const { slug, title, description, assets } = pageContext;
-  const urlParams = new URLSearchParams(window.location.search);
-  const qrIsShown = urlParams.get('qr') !== null;
+  let qrIsShown = false;
+  if (typeof window !== `undefined`) {
+    const urlParams = new URLSearchParams(window.location.search);
+    qrIsShown = urlParams.get('qr') !== null;
+  }
 
   return (
     <div>
