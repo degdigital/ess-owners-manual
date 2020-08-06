@@ -3,16 +3,17 @@ import React from 'react';
 const LandingPage = ({ pageContext }) => {
   // console.log(pageContext);
 
-  const { id, title, description, assets } = pageContext;
+  const baseUrl = 'https://thirsty-shannon-179bfb.netlify.app';
+  const { slug, id, title, description, assets } = pageContext;
 
   return (
     <div>
       <h1>{title}</h1>
       {description && <p>{description}</p>}
       <img
-        src={`https://api.qrserver.com/v1/create-qr-code/?data=${id}&amp;size=100x100`}
-        alt=""
-        title=""
+        src={`https://api.qrserver.com/v1/create-qr-code/?data=${baseUrl}/${slug}&amp;size=100x100`}
+        alt={title}
+        title={description}
       />
       {assets && (
         <table>
@@ -38,9 +39,9 @@ const LandingPage = ({ pageContext }) => {
                     <td>{correctDescription}</td>
                     <td>
                       <img
-                        src={`https://api.qrserver.com/v1/create-qr-code/?data=${id}&amp;size=100x100`}
-                        alt=""
-                        title=""
+                        src={`https://api.qrserver.com/v1/create-qr-code/?data=${correctLink}&amp;size=100x100`}
+                        alt={title}
+                        title={correctDescription}
                       />
                     </td>
                   </tr>
